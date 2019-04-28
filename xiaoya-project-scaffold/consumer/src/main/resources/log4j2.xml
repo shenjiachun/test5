@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <!-- 请将此处的'infra.test-elk'替换为当前系统的appid -->
+        <Property name="APP_ID" value="backend.xiaoya-project-scaffold-consumer"/>
+        <Property name="LOG_PATH" value="/data/xiaoya/logs/${APP_ID}"/>
+        <Property name="LOG_PATTERN"
+                  value="%d{yyyy-MM-dd HH:mm:ss.SSS} %p %c [%t]: ${APP_ID} %msg %ex{separator(|)}%n"/>
+    </Properties>
+    <Appenders>
+    	<console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+        </console>
+        <RollingFile name="RollingFile" fileName="${LOG_PATH}/app.log"
+                     filePattern="${LOG_PATH}/app-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="1GB"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${LOG_PATH}" maxDepth="1">
+                    <IfFileName glob="app-*.log.gz"/>
+                    <IfAccumulatedFileCount exceeds="14"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <appender name="CatAppender" class="com.xiaoya.scaffold.consumer.cat.Log4j2Appender"></appender>
+    </Appenders>
+    
+    <Loggers>
+        <AsyncRoot level="INFO">
+            <AppenderRef ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+            <AppenderRef ref="catAppender"/>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>
