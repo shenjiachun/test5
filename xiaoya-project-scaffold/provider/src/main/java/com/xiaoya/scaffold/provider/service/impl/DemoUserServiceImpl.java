@@ -3,6 +3,7 @@ package com.xiaoya.scaffold.provider.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.xiaoya.scaffold.api.bean.request.BaseRequest;
+import com.xiaoya.scaffold.api.bean.request.DemoUserRequest;
 import com.xiaoya.scaffold.api.bean.response.DemoUserResponse;
 import com.xiaoya.scaffold.api.service.DemoUserService;
 import com.xiaoya.scaffold.provider.bean.DemoUser;
@@ -51,5 +52,22 @@ public class DemoUserServiceImpl implements DemoUserService {
         }
 
         return demoUserResponseList;
+    }
+
+    public int addUser(DemoUserRequest demoUserRequest) {
+        DemoUser demoUser = new DemoUser();
+        demoUser.setUserName(demoUserRequest.getUserName());
+        demoUser.setUserId(demoUserRequest.getUserId());
+        demoUser.setPassword(demoUserRequest.getPassword());
+        demoUser.setPhone(demoUserRequest.getPhone());
+
+        int insert = 0;
+        try {
+            insert = demoUserMapper.insert(demoUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return insert;
     }
 }

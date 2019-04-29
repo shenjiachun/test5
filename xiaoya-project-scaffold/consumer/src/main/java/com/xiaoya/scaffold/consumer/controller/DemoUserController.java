@@ -2,6 +2,8 @@ package com.xiaoya.scaffold.consumer.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.xiaoya.scaffold.api.bean.request.BaseRequest;
+import com.xiaoya.scaffold.api.bean.request.DemoShardingUserRequest;
+import com.xiaoya.scaffold.api.bean.request.DemoUserRequest;
 import com.xiaoya.scaffold.api.bean.response.DemoUserResponse;
 import com.xiaoya.scaffold.api.service.DemoUserService;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +47,16 @@ public class DemoUserController {
         baseRequest.setPageNum(pageNum);
         baseRequest.setPageSize(pageSize);
         return demoUserService.findAllUsers(baseRequest);
+    }
+
+    @GetMapping("/addUser")
+    public Object add() {
+        DemoUserRequest demoUserRequest = new DemoUserRequest();
+        demoUserRequest.setUserId(8L);
+        demoUserRequest.setUserName("黄药师");
+        demoUserRequest.setPassword("8");
+        demoUserRequest.setPhone("18800000000");
+        demoUserService.addUser(demoUserRequest);
+        return "success";
     }
 }

@@ -1,0 +1,13 @@
+### hello
+GET {{url}}/hello/hello
+Accept : application/json
+Content-Type : application/json;charset=UTF-8
+Cache-Control : no-cache
+
+### test
+GET {{url}}/hello/test?name=abc
+Accept : application/json
+Content-Type : application/json;charset=UTF-8
+Cache-Control : no-cache
+
+###

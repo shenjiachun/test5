@@ -1,0 +1,7 @@
+### 分页获取用户信息
+POST {{url}}/user/findAllPage?pageNum=1&pageSize=2
+Accept : application/json
+Content-Type : application/json;charset=UTF-8
+Cache-Control : no-cache
+
+###

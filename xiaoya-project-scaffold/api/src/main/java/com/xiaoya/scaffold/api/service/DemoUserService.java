@@ -1,9 +1,8 @@
 package com.xiaoya.scaffold.api.service;
 
 
-
-
 import com.xiaoya.scaffold.api.bean.request.BaseRequest;
+import com.xiaoya.scaffold.api.bean.request.DemoUserRequest;
 import com.xiaoya.scaffold.api.bean.response.DemoUserResponse;
 
 import java.util.List;
@@ -19,4 +18,6 @@ public interface DemoUserService {
     String sayHello(String name);
 
     List<DemoUserResponse> findAllUsers(BaseRequest baseRequest);
+
+    public int addUser(DemoUserRequest demoUserRequest);
 }
